@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    networks:
+      - net
+      - common
+    environment:
+      - LETSENCRYPT_HOST=port.plethora.id
+      - TRUSTED_PROXIES=172.18.0.0/16
+      - VIRTUAL_HOST=port.plethora.id
+      - VIRTUAL_PORT=9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+networks:
+  net:
+    external: true
+  common:
+    internal: true
+
+volumes:
+  portainer_data:

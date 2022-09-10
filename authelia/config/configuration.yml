@@ -1,0 +1,68 @@
+---
+###############################################################
+#                   Authelia configuration                    #
+###############################################################
+
+jwt_secret: ceiNYQ@jmD#ZCjA8S@D&YhqQ
+default_redirection_url: https://duck.com
+
+server:
+  host: 0.0.0.0
+  port: 9091
+
+log:
+  level: debug
+
+totp:
+  issuer: auth.plethora.id
+
+authentication_backend:
+  file:
+    path: /config/users_database.yml
+
+access_control:
+  default_policy: deny
+  rules:
+    - domain: auth.plethora.id
+      policy: bypass
+    - domain: myhome.plethora.id
+      policy: one_factor
+    - domain: nextcloud.plethora.id
+      policy: one_factor
+
+session:
+  name: authelia_session
+  secret: BeC3Yc6U&H#!M7keCyLMT9hq
+  expiration: 3600  # 1 hour
+  inactivity: 300  # 5 minutes
+  domain: plethora.id  # Should match whatever your root protected domain is
+
+regulation:
+  max_retries: 3
+  find_time: 120
+  ban_time: 300
+
+storage:
+  encryption_key: eagaQ^Wsff@RFUfeN&7wC7YXGsej!BmfQ@HzudyEoZb!K*ed
+  local:
+    path: /config/db.sqlite3
+
+notifier:
+  disable_startup_check: false
+  smtp:
+    host: in-v3.mailjet.com
+    port: 587
+    timeout: 5s
+    username: niko@skyline.sbs
+    password: 9^C3$Af%TBXE!a^DqHcuCPye
+    sender: "Authelia <admin@example.com>"
+    identifier: localhost
+    subject: "[Authelia] {title}"
+    startup_check_address: niko@skyline.sbs
+    disable_require_tls: false
+    disable_html_emails: false
+    tls:
+      server_name: in-v3.mailjet.com
+      skip_verify: false
+      minimum_version: TLS1.2
+...

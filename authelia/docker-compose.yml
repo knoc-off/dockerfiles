@@ -1,0 +1,29 @@
+version: '3.3'
+
+networks:
+  net:
+    driver: bridge
+
+services:
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    volumes:
+      - ./config:/config
+    networks:
+      - net
+      - common
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    environment:
+      - TZ=Europe/Berlin
+      - LETSENCRYPT_HOST=auth.plethora.id
+      - VIRTUAL_HOST=auth.plethora.id
+      - TRUSTED_PROXIES=172.18.0.0/16
+
+networks:
+  net:
+    external: true
+  common:
+    internal: true

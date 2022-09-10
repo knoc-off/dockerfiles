@@ -1,0 +1,21 @@
+---
+###############################################################
+#                         Users Database                      #
+###############################################################
+
+# This file can be used if you do not have an LDAP set up.
+
+# List of users
+users:
+  niko:
+    displayname: "Niko Selby"
+    password: "$argon2id$v=19$m=1024,t=1,p=8$dVAzWmtESllwekF0dGd3bw$jrrOyXp+YNQdx9HK/NUe6tUBTe0nNBrkus6EwCihOmM"
+    email: niko@skyline.sbs
+    groups:
+      - admins
+      - dev
+  eileen:
+    displayname: "Eileen Selby"
+    password: "$argon2id$v=19$m=1024,t=1,p=8$dVAzWmtESllwekF0dGd3bw$Rl/AG6RXkWoZl4dYyuwxSzjiaoGK8off3JkBVm/Ufy8"
+    email: eileen.selby@gmail.com
+...

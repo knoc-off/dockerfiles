@@ -1,0 +1,23 @@
+---
+version: "2"
+services:
+  homer:
+    image: b4bz/homer
+    #To build from source, comment previous line and uncomment below
+    #build: .
+    container_name: private-homer
+    networks: ["net", "common"]
+    volumes:
+      - /opt/dockers/private-homer/assets:/www/assets
+    user: 0:0 # default
+    environment:
+      - INIT_ASSETS=1 # default
+      - LETSENCRYPT_HOST=myhome.plethora.id
+      - VIRTUAL_HOST=myhome.plethora.id
+      - TRUSTED_PROXIES=172.18.0.0/16
+
+networks:
+  net:
+    external: true
+  common:
+    internal: true
